@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html 
+    lang="es"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://thymeleaf.org/"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}"
+    >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+</head>
+<body>
+    <div layout:fragment="contenido" class="container-fluid">
+        <div class="card my-4">
+            <div class="card-header">
+                <h5 th:text="${titulo}" class="card-title"></h5>
+            </div>
+            <div class="card-body">
+                <table id="tabla-usuarios" class="table table-hover table-bordered table-sm text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuario</th>
+                            <th>Contraseña</th>
+                            <th>Permiso</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="u : ${usuarios}">
+                            <td th:text="${u.id}" th:class="${u.activo} ? '' : 'tachado'"></td>
+                            <td th:text="${u.nombre}" th:class="${u.activo} ? '' : 'tachado'"></td>
+                            <td th:text="${#strings.abbreviate(u.clave, 5)}" th:class="${u.activo} ? '' : 'tachado'"></td>
+                            <td th:text="${#strings.substring(u.permiso, 9)}" th:class="${u.activo} ? '' : 'tachado'"></td>
+                            <td th:text="${u.activo} ? 'Activo' : 'Inactivo'"></td>
+                            <td style="max-width: 40px;">
+                                <a th:href="@{/productos/editar/} + ${u.id}" class="btn btn-sm btn-warning" title="Editar">
+                                    <i class='bx bxs-edit bx-spin' ></i>
+                                </a>    
+                                <a th:id="${u.id}" class="btn btn-sm btn-danger borrar" title="Borrar">
+                                    <i class='bx bxs-trash bx-spin' ></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div th:replace="/usuarios/modal-form :: modal-form"></div>
+            </div>
+            <div class="card-footer">
+                <a id="btn-crear" class="btn btn-outline-primary float-end">
+                    Crear Usuario
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script th:fragment="js" th:src="@{/js/usuarios.js}">
+       
+    </script>
+</body>
+</html>

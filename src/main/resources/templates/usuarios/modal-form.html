@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Dialogo Modal -->
+	<div id="usuariosModal" class="modal fade" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true"
+		th:fragment="modal-form">
+		<div class="modal-dialog modal-lg modal-fullscreen-lg-down">
+			<form id="form" action="#">
+				<div class="modal-content">
+					<div class="modal-header text-white modal-header">
+						<h5 id="titleModal"></h5>
+						<button type="button" class="btn btn-close"
+							data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row row-cols-1">
+							<div class="col col-sm-6">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="nombre"
+										placeholder="Nombre de Usuario" />
+									<label for="nombre" class="text-info">Nombre</label>
+									<div id="error-nombre"></div>
+								</div>
+							</div>
+							<div class="col col-sm-6">
+								<div class="form-floating mb-3">
+									<select id="permiso" name="permiso"
+										class="form-select">
+										<option th:each="p : ${permisos}" th:value="${p.id}"
+											th:text="${p}"></option>
+									</select>
+									<label for="permiso" class="text-info">Permiso</label>
+									<div id="error-permiso"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row row-cols-1">
+							<div class="col col-sm-6">
+								<div class="form-floating mb-3">
+									<input type="password" class="form-control" id="pass"
+										placeholder="Contraseña" />
+									<label for="pass" class="text-info">Contraseña</label>
+									<div id="error-pass"></div>
+								</div>
+							</div>
+							<div class="col col-sm-6">
+								<div class="form-floating mb-3">
+									<input type="password" class="form-control" id="repeat"
+										placeholder="Repetir Contraseña" />
+									<label for="repeat" class="text-info">Repetir Contraseña</label>
+									<div id="error-repeat"></div>
+								</div>
+							</div>
+						</div>
+						
+						<input type="hidden" class="form-control" id="numero" name="numero" />
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-sm btn-secondary"
+							data-bs-dismiss="modal">Cerrar</button>
+						<button id="btnGuardar" type="button" class="btn btn-sm btn-info text-white">Guardar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
