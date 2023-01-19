@@ -42,8 +42,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     @Transactional
     public void guardar(Usuario usuario) {
-        // TODO Auto-generated method stub
-        
+        usuarioRepository.save(usuario);
     }
 
     @Override

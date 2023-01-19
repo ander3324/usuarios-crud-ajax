@@ -38,7 +38,7 @@
                             <td th:text="${#strings.substring(u.permiso, 9)}" th:class="${u.activo} ? '' : 'tachado'"></td>
                             <td th:text="${u.activo} ? 'Activo' : 'Inactivo'"></td>
                             <td style="max-width: 40px;">
-                                <a th:href="@{/productos/editar/} + ${u.id}" class="btn btn-sm btn-warning" title="Editar">
+                                <a th:id="${u.id}" class="btn btn-sm btn-warning editar" title="Editar">
                                     <i class='bx bxs-edit bx-spin' ></i>
                                 </a>    
                                 <a th:id="${u.id}" class="btn btn-sm btn-danger borrar" title="Borrar">
@@ -48,7 +48,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div th:replace="/usuarios/modal-form :: modal-form"></div>
+                <div th:replace="~{/usuarios/modal-form :: modal-form}"></div>
             </div>
             <div class="card-footer">
                 <a id="btn-crear" class="btn btn-outline-primary float-end">
