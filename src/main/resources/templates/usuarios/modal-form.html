@@ -11,7 +11,7 @@
 	<div id="usuariosModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
 		th:fragment="modal-form">
 		<div class="modal-dialog modal-fullscreen-lg-down modal-dialog-centered">
-			<form id="form" action="#">
+			<form id="form" action="#"  enctype="multipart/form-data">
 				<div class="modal-content">
 					<div class="modal-header bg-dark text-light modal-header">
 						<h5 id="titleModal"></h5>
@@ -51,6 +51,18 @@
 									<div id="error-permiso"></div>
 								</div>
 							</div>
+							<fieldset>
+								<legend class="primary-color text-light pl-2">Imagen de Perfil</legend>
+								<div class="md-form">
+									<img id="img_perfil" class="img-thumbnail rounded float-right mb-4  imagePreview"
+										th:src="@{'/uploads/logo.png'}"
+										th:alt="Imagen"
+										style="max-width: 36%; margin-top: -50px; margin-right: 10px;" />
+										<br />
+									<input id="ruta_img" type="file" name="file" class="md-form rounded"
+										onchange="previewImage(this, [256], 4);">
+								</div>
+							</fieldset>
 						</div>
 
 						<input type="hidden" class="form-control" id="numero" name="numero" />
@@ -63,6 +75,7 @@
 			</form>
 		</div>
 	</div>
+	
 </body>
 
 </html>

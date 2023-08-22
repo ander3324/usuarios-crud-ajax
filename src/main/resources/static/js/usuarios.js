@@ -75,6 +75,7 @@ $(".editar").on("click", function () {
       $("#nombre").val(data.nombre);
       $("#clave").val(data.clave);
       $("#permiso").val(data.permiso.id);
+      $("#img_perfil").attr('src', '/uploads/' + data.rutaImagen);
     },
     error: function (xhr) {
       Swal.fire({
@@ -99,6 +100,8 @@ $("#btn-guardar").on("click", function () {
   usuario.nombre = $("#nombre").val();
   usuario.clave = $("#clave").val();
   usuario.permiso = $("#permiso").val();
+  usuario.rutaImagen = document.getElementById('ruta_img').files[0].name;
+  //usuario.rutaImagen = $("#ruta_img").val();
 
   if ($("#numero").val() !== "")
     usuario.id = $("#numero").val();

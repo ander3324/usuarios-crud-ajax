@@ -16,7 +16,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,6 +36,9 @@ public class Usuario {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_permiso", referencedColumnName = "id")
     private Permiso permiso;
+
+    @Column(name = "ruta_img", columnDefinition = "Varchar(600) default 'logo.png'")
+    private String rutaImagen;
 
     public Usuario() {
         activo = true;
@@ -79,6 +82,18 @@ public class Usuario {
 
     public void setPermiso(Permiso permiso) {
         this.permiso = permiso;
+    }
+
+    public boolean getActivo() {
+        return this.activo;
+    }
+
+    public String getRutaImagen() {
+        return this.rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
     }
 
     @Override
