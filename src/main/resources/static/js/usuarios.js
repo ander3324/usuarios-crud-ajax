@@ -18,7 +18,7 @@ const limpiar = () => {
 }
 
 const borrarTextos = () => {
-  
+
   //Limpiar textos...
   $("#form :input").each(function () {
     $(this).val("");
@@ -92,30 +92,19 @@ $(".editar").on("click", function () {
 // Hacer el submit del usuario
 //
 
-$("#btn-guardar").on("click", function () {
+$('#user-form').submit(function (evt) {
 
-  // Crear objeto:
-  var usuario = {};
+  evt.preventDefault();
 
-  usuario.nombre = $("#nombre").val();
-  usuario.clave = $("#clave").val();
-  usuario.permiso = $("#permiso").val();
-  usuario.rutaImagen = document.getElementById('ruta_img').files[0].name;
-  //usuario.rutaImagen = $("#ruta_img").val();
-
-  if ($("#numero").val() !== "")
-    usuario.id = $("#numero").val();
-  else
-    usuario.id = 0;
+  var formData = new FormData(this);
 
   $.ajax({
-    method: "POST",
-    url: `/guardar`,
-    data: usuario,
-    beforeSend: function () {
-      // Remover errores previos...
-      limpiar();
-    },
+    type: 'POST',
+    url: "/guardar",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
     success: function () {
 
       $("#usuariosModal").modal("hide");
@@ -157,6 +146,7 @@ $("#btn-guardar").on("click", function () {
     }
   });
 });
+
 
 //
 // Borrar

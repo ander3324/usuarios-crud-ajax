@@ -1,5 +1,6 @@
 package com.analistas.usuarioscrudajax.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.analistas.usuarioscrudajax.entities.Permiso;
 import com.analistas.usuarioscrudajax.entities.Usuario;
+import com.analistas.usuarioscrudajax.service.IUploadFileService;
 import com.analistas.usuarioscrudajax.service.IUsuarioService;
 
 import jakarta.validation.Valid;
@@ -26,6 +30,9 @@ public class UsuarioController {
 
     @Autowired
     IUsuarioService usuarioService;
+
+	@Autowired
+	private IUploadFileService uploadFileService;
     
     @GetMapping("/")
     public String listar(Model model) {
@@ -45,7 +52,9 @@ public class UsuarioController {
 	}
 
     @PostMapping("/guardar")
-	public ResponseEntity<?> guardar(@Valid Usuario usuario, BindingResult result) {
+	public ResponseEntity<?> guardar(@Valid Usuario usuario, 
+		BindingResult result, 
+		@RequestParam("file") MultipartFile logo) {
 
 		if (result.hasErrors()) {
 			Map<String, String> errors = new HashMap<>();
@@ -54,6 +63,29 @@ public class UsuarioController {
 			}
 			return ResponseEntity.unprocessableEntity().body(errors);
 		}
+
+		//Tratar la imagen
+		if (!logo.isEmpty()) {
+
+			// Reemplazar foto si existe: 
+//			if (empresa.getId() != 0 && empresa.getId() > 0 && empresa.getRutaLogo() != null
+//					&& empresa.getRutaLogo().length() > 0) {
+//
+//				uploadFileService.delete(empresa.getRutaLogo());
+//			}
+
+			String uniqueFilename = null;
+
+			try {
+				uniqueFilename = uploadFileService.copy(logo);
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
+			usuario.setRutaImagen(uniqueFilename);
+		}
+
 
         //No olvidar de usar PasswordEncoder aquí.
         //Para ello, añadir la dependencia de Spring Security.

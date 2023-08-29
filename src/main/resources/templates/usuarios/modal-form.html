@@ -11,7 +11,7 @@
 	<div id="usuariosModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
 		th:fragment="modal-form">
 		<div class="modal-dialog modal-fullscreen-lg-down modal-dialog-centered">
-			<form id="form" action="#"  enctype="multipart/form-data">
+			<form id="user-form" action="@{/guardar}"  enctype="multipart/form-data">
 				<div class="modal-content">
 					<div class="modal-header bg-dark text-light modal-header">
 						<h5 id="titleModal"></h5>
@@ -21,7 +21,7 @@
 						<div class="row row-cols-1">
 							<div class="col col-sm-12">
 								<div class="form-floating mb-3">
-									<input type="text" class="form-control" id="nombre"
+									<input type="text" class="form-control" id="nombre" name="nombre"
 										placeholder="Nombre de Usuario" />
 									<label for="nombre" class="text-info">Nombre</label>
 									<div id="error-nombre"></div>
@@ -29,7 +29,7 @@
 							</div>
 							<div class="col col-sm-12">
 								<div class="form-floating mb-3">
-									<input type="password" class="form-control" id="clave" placeholder="Contraseña" />
+									<input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" />
 									<label for="pass" class="text-info">Contraseña</label>
 									<div id="error-clave"></div>
 								</div>
@@ -59,17 +59,17 @@
 										th:alt="Imagen"
 										style="max-width: 36%; margin-top: -50px; margin-right: 10px;" />
 										<br />
-									<input id="ruta_img" type="file" name="file" class="md-form rounded"
+									<input id="file" type="file" name="file" class="md-form rounded"
 										onchange="previewImage(this, [256], 4);">
 								</div>
 							</fieldset>
 						</div>
 
-						<input type="hidden" class="form-control" id="numero" name="numero" />
+						<input type="hidden" class="form-control" id="numero" name="id" />
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-						<button id="btn-guardar" type="button" class="btn btn-sm btn-info text-white">Guardar</button>
+						<button id="btn-guardar" type="submit" class="btn btn-sm btn-info text-white">Guardar</button>
 					</div>
 				</div>
 			</form>
